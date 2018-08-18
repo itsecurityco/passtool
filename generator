@@ -1,0 +1,156 @@
+#!/usr/bin/env python
+# Author: Juan (@itsecurityco)
+# Generate a list of possible password for a company name.
+# The name of company should be in lowercase (script will generate the iterations in uppercase).
+# Use like this:
+#
+# user@hostname:~/bin/passtool$ ./generator name
+#
+# Example:
+#
+# user@hostname:~/bin/passtool$ ./generator google
+# google1
+# google2015
+# google2014
+# ...
+
+
+import sys
+
+class generator:
+
+    def __init__(self):
+
+        self.abc = "abcdefghijklmnopqrstuvwxyz"
+
+        self.leetdict = {
+            'a':['4'],
+            'e':['3'],
+            'i':['1'],
+            'o':['0'],
+        }
+        self.specialdict = {
+            '*',
+            '+',
+            '_',
+            '#',
+            '$',
+            '%',
+	    '.',
+        }
+        self.numberdict = {
+            '1',
+            '2',
+            '3',
+	    '4',
+	    '5',
+	    '6',
+	    '7',
+	    '8',
+	    '9',
+	    '0',
+            '12',
+            '13',
+            '14',
+            '15',
+            '16',
+	    '17',
+	    '18',
+            '2016',
+            '2015',
+            '2014',
+	    '2017',
+	    '2018',
+        }
+
+    def leet(self, wordlist):
+        mlist = wordlist
+        for word in wordlist:
+            for i in range(len(word)):
+                chars = list(word)
+                if chars[i].lower() in self.leetdict.keys():
+                    for x in self.leetdict[chars[i].lower()]:
+                        chars[i] = x
+                        neword = ''.join(chars)
+                        if not neword in wordlist:
+                            mlist.append(neword)
+        return mlist
+
+    def special(self, base, lenght=1):
+        wordlist = []
+        for element in base:
+            for char in self.specialdict:
+                tmp = element+char
+                wordlist.append(tmp)
+        wordlist2 = []
+        for y in wordlist:
+            for char in self.specialdict:
+                tmp = y+char
+                wordlist2.append(tmp)
+        wordlist3 = []
+        for z in wordlist2:
+            for char in self.specialdict:
+                tmp = z+char
+                wordlist3.append(tmp)
+
+        if lenght == 1:
+            return wordlist
+        elif lenght == 2:
+            return wordlist + wordlist2
+        elif lenght == 3:
+            return wordlist + wordlist2 + wordlist3
+
+    def number(self, base):
+        wordlist = []
+        for element in base:
+            for num in self.numberdict:
+                tmp = element+num
+                wordlist.append(tmp)
+        return wordlist
+
+    def main(self):
+        output = []
+        # base + numbers
+        number_wordlist = []
+        for x in self.number([sys.argv[1]]):
+            output.append(x)
+            number_wordlist.append(x)
+
+        # only leet
+        leet = self.leet([sys.argv[1]])
+        for z in leet:
+            output.append(z)
+
+        # leet + numbers
+        leet_number_wordlist = []
+        for i in self.number(leet):
+            output.append(i)
+            leet_number_wordlist.append(i)
+
+        # leet + numbers + special
+        for j in self.special(leet_number_wordlist, 3):
+            output.append(j)
+
+        # leet + special
+        leet_special = []
+        for k in self.special(leet, 3):
+            leet_special.append(k)
+            output.append(k)
+
+        # base + special + numbers
+        for l in self.number(leet_special):
+            output.append(l)
+
+        # Uppercase
+        for pwd in output:
+            if pwd[0] in self.abc:
+                output.append(pwd[0].upper() + pwd[1:])
+
+        # print passwords
+        for pwd in output:
+            print pwd
+
+
+if __name__ == "__main__":
+    generator = generator()
+    generator.main()
