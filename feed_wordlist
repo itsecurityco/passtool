@@ -1,0 +1,35 @@
+#!/bin/sh
+# Autor: Juan Escobar (@itsecurityco)
+# Append new passwords from a file to your custom big wordlist.
+# Script also remove duplicates for both files, so you don't have to clean none of the files.
+# Use like this:
+#
+# user@hostname:~/bin/passtool$ ./feed_wordlist rockyou_custom.txt passwords.txt
+#
+# Example:
+#
+# user@hostname:~/bin/passtool$ ./feed_wordlist rockyou_custom.txt google_passwords.txt
+# [*] uniq new password file...
+# [*] Feeding original wordlist with password file
+# [*] uniq new wordlist ...
+# [!] /home/user/bin/passtool/rockyou_custom.txt.18Aug2018 file has been created.
+
+
+mydate=$(date +%d%b%Y)
+
+echo "[*] uniq new password file..."
+sort "$2" > "$2".sorted
+uniq "$2".sorted > "$2".uniq
+
+echo "[*] Feeding original wordlist with password file"
+cat "$2".uniq >> "$1"
+
+echo "[*] uniq new wordlist ..."
+sort "$1" > "$1".sorted
+uniq "$1".sorted > "$1"."$mydate"
+
+#echo "[*] Deleting temporal files..."
+rm "$1".sorted "$2".sorted "$2".uniq
+
+echo "[!] $1.$mydate file has been created."
+
