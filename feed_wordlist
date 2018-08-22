@@ -28,7 +28,7 @@ echo "[*] uniq new wordlist ..."
 sort "$1" > "$1".sorted
 uniq "$1".sorted > "$1"."$mydate"
 
-#echo "[*] Deleting temporal files..."
+echo "[*] Deleting temporal files..."
 rm "$1".sorted "$2".sorted "$2".uniq
 
 echo "[!] $1.$mydate file has been created."
