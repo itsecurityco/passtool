@@ -14,6 +14,11 @@
 # [*] uniq new wordlist ...
 # [!] /home/user/bin/passtool/rockyou_custom.txt.18Aug2018 file has been created.
 
+if [ $# -le 1 ]
+then
+    echo "Usage: ./feed_wordlist rockyou_custom.txt passwords.txt"
+    exit 1
+fi
 
 mydate=$(date +%d%b%Y)
 
