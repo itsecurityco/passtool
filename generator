@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # Author: Juan (@itsecurityco)
 # Generate a list of possible password for a company name.
-# The name of company should be in lowercase (script will generate the iterations in uppercase).
 # Use like this:
 #
 # user@hostname:~/bin/passtool$ ./generator name
@@ -112,12 +111,12 @@ class generator:
         output = []
         # base + numbers
         number_wordlist = []
-        for x in self.number([sys.argv[1]]):
+        for x in self.number([sys.argv[1].lower()]):
             output.append(x)
             number_wordlist.append(x)
 
         # only leet
-        leet = self.leet([sys.argv[1]])
+        leet = self.leet([sys.argv[1].lower()])
         for z in leet:
             output.append(z)
 
