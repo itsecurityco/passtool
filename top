@@ -1,5 +1,11 @@
 #!/bin/sh
 # Top 10 of the most used passwords
 
-cat "$1" | sort | uniq -c | sort -nr | head
+if [ $# -le 0 ]
+then
+    echo "Get the top 10 of the most used passwords in a file"
+    echo "Usage: $0 file.txt"
+    exit 1
+fi
 
+cat "$1" | sort | uniq -c | sort -nr | head
