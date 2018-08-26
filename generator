@@ -16,6 +16,11 @@
 
 import sys
 
+# Usage help
+if len(sys.argv) <= 1:
+    print "Usage: %s name" % sys.argv[0]
+    exit(1)
+
 class generator:
 
     def __init__(self):
