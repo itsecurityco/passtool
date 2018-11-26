@@ -1,5 +1,5 @@
 #!/bin/sh
 # Top 10 of the most used passwords
 
-cat "$1" | sort | uniq -c | sort -nr | head
+sort "$1" | uniq -c | sort -nr | head
 
