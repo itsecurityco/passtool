@@ -1,7 +1,7 @@
 Scripts for cracking / bruteforcing.
 
 ## Password generator
-Generate a list of possible password for a company name. The name of company should be in lowercase (script will generate the iterations in uppercase). Use like this:
+Generate a list of possible password for a company name. Use like this:
 ```sh
 user@hostname:~/bin/passtool$ ./generator name
 ```
