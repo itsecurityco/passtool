@@ -18,3 +18,10 @@ ver 1.0 efh 5455 efh 7875 archive.zip->token PKZIP Encr: 2b chk, TS_chk, cmplen=
 digest.txt: archive.zip:$pkzip2$1*2*2*0*2d*21*c10509e*0*3f*0*2d*0c10*360a*f5e92c2b27b0f6ece97e6030ccb3338eb42b7c5ec117f4b49bfb0232e1e45e1673c6ef2fb8c952ba2410a770aa*$/pkzip2$:::::archive.zip
 john --wordlist=1000000-password-seclists.txt digest.txt
 yankees          (archive.zip)
+
+PDF 1.4-1.6
+pdf2john secret.pdf > hash.txt # remove the preceding file name "secret.pdf:"
+hashcat -m 10500 hash -a 0 /root/wordlists/1000000-password-seclists.txt --force
+Password: sopranos
+pdftotext -upw sopranos secret.pdf
+secret.txt: 49cdf40206c7c06c49f8284f83dfd7a3
