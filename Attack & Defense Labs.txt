@@ -11,3 +11,10 @@ archive.rar:$rar5$16$50d889a2c6441510dd0c8ab76dde4fd6$15$697757daca178f6f8813549
 hash.txt: $rar5$16$50d889a2c6441510dd0c8ab76dde4fd6$15$697757daca178f6f88135491827bdad6$8$e13f0c4d2f8286d5
 hashcat -O -m 13000 -a 3 hash.txt 1000000-password-seclists.txt
 $rar5$16$50d889a2c6441510dd0c8ab76dde4fd6$15$697757daca178f6f88135491827bdad6$8$e13f0c4d2f8286d5:1qaz2wsx
+
+PKZIP
+zip2john archive.zip > digest.txt
+ver 1.0 efh 5455 efh 7875 archive.zip->token PKZIP Encr: 2b chk, TS_chk, cmplen=45, decmplen=33, crc=C10509E
+digest.txt: archive.zip:$pkzip2$1*2*2*0*2d*21*c10509e*0*3f*0*2d*0c10*360a*f5e92c2b27b0f6ece97e6030ccb3338eb42b7c5ec117f4b49bfb0232e1e45e1673c6ef2fb8c952ba2410a770aa*$/pkzip2$:::::archive.zip
+john --wordlist=1000000-password-seclists.txt digest.txt
+yankees          (archive.zip)
