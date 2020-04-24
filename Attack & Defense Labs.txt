@@ -1,6 +1,13 @@
 Attack & Defense Labs
 
 NTLM
-hash: f06343aad24fe6a96e675f6d8adf1c44
+digest.txt: f06343aad24fe6a96e675f6d8adf1c44
 hashcat -m 1000 -a 3 -O digest.txt -1 ?d?l ?1?1?1?1?1
 f06343aad24fe6a96e675f6d8adf1c44:9c4d7
+
+RAR5
+rar2john archive.rar
+archive.rar:$rar5$16$50d889a2c6441510dd0c8ab76dde4fd6$15$697757daca178f6f88135491827bdad6$8$e13f0c4d2f8286d5
+hash.txt: $rar5$16$50d889a2c6441510dd0c8ab76dde4fd6$15$697757daca178f6f88135491827bdad6$8$e13f0c4d2f8286d5
+hashcat -O -m 13000 -a 3 hash.txt 1000000-password-seclists.txt
+$rar5$16$50d889a2c6441510dd0c8ab76dde4fd6$15$697757daca178f6f88135491827bdad6$8$e13f0c4d2f8286d5:1qaz2wsx
