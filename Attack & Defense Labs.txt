@@ -1,0 +1,6 @@
+Attack & Defense Labs
+
+NTLM
+hash: f06343aad24fe6a96e675f6d8adf1c44
+hashcat -m 1000 -a 3 -O digest.txt -1 ?d?l ?1?1?1?1?1
+f06343aad24fe6a96e675f6d8adf1c44:9c4d7
