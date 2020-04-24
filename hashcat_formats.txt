@@ -1,0 +1,3 @@
+CRC32s
+Digest: abde1234
+Hash: abde1234:00000000
